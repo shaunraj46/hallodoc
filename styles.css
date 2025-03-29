@@ -75,17 +75,19 @@ footer .h-20 {
 
 /* FAQs accordion styles */
 .faq-content {
-    display: none !important; /* Force hide by default */
+    max-height: 0;             /* Hidden by default */
     opacity: 0;
     overflow: hidden;
-    transition: opacity 0.3s ease;
+    transition: max-height 0.4s ease, opacity 0.4s ease, padding-top 0.4s ease;
+    padding-top: 0;            /* No padding when collapsed */
 }
 
 .faq-active .faq-content {
-    display: block !important; /* Force show when active */
+    max-height: 500px;         /* Adjust this value as needed */
     opacity: 1;
     padding-top: 0.5rem;
 }
+
 
 .faq-icon {
     transition: transform 0.4s ease;
