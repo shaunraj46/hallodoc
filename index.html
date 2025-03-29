@@ -88,65 +88,32 @@
     </nav>
 
     <!-- Hero Section with Three.js Canvas -->
-    <section class="pt-24 pb-20 md:pt-32 md:pb-28 relative overflow-hidden">
+    <section class="bg-white text-[#1E293B] min-h-screen flex flex-col justify-center items-center px-6 py-20 relative overflow-hidden">
         <canvas id="hero-canvas" class="absolute top-0 left-0 w-full h-full -z-10"></canvas>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="reveal">
-                    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight">Let Patients Book Appointments via WhatsApp</h1>
-                    <p class="mt-4 text-xl text-gray-600">Automated booking, rescheduling, and cancellations — so your team doesn't have to answer every call or email.</p>
-                    <div class="mt-8 flex flex-wrap gap-4">
-                        <a href="#early-access" class="btn-3d px-6 py-3 bg-primary text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition duration-300">
-                            Start Free – 1 Year for Early Clinics
-                        </a>
-                        <a href="#" class="flex items-center px-5 py-3 bg-white text-primary-dark font-medium rounded-lg shadow hover:shadow-md transition duration-300">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M17.498 14.382c-.301-.15-1.767-.867-2.04-.966-.273-.101-.473-.15-.673.15-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.523.146-.181.194-.301.297-.496.1-.21.049-.394-.025-.554-.075-.164-.672-1.621-.922-2.22-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.019-1.045 2.475s1.07 2.865 1.219 3.075c.149.18 2.095 3.195 5.076 4.483.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.57-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                            </svg>
-                            Chat on WhatsApp
-                        </a>
-                    </div>
-                </div>
-                <div class="chat-bubble reveal reveal-delay-1">
-                    <div class="chat-bubble-inner relative">
-                        <!-- Phone mockup with 3D effect -->
-                        <div class="bg-white p-4 rounded-3xl shadow-2xl transform rotate-3 floating">
-                            <!-- Phone Screen -->
-                            <div class="bg-gray-100 rounded-2xl overflow-hidden border-8 border-white">
-                                <!-- WhatsApp header -->
-                                <div class="bg-primary p-3 flex items-center">
-                                    <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center mr-3">
-                                        <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 012.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.188 8.188 0 01-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24z"></path>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <p class="text-white font-medium">HalloDoc Assistant</p>
-                                        <p class="text-green-100 text-xs">Online</p>
-                                    </div>
-                                </div>
-                                <!-- Chat messages -->
-                                <div class="p-3 space-y-3">
-                                    <div class="bg-white p-2 rounded-lg rounded-bl-none max-w-[80%] shadow-sm">
-                                        <p class="text-sm">👋 Hi! I'm your HalloDoc Assistant. Would you like to book an appointment with Dr. Miller?</p>
-                                    </div>
-                                    <div class="bg-green-100 p-2 rounded-lg rounded-br-none max-w-[80%] ml-auto shadow-sm">
-                                        <p class="text-sm">Yes, I need an appointment for next week.</p>
-                                    </div>
-                                    <div class="bg-white p-2 rounded-lg rounded-bl-none max-w-[80%] shadow-sm">
-                                        <p class="text-sm">Great! Here are available slots next week:</p>
-                                        <div class="mt-2 grid grid-cols-2 gap-2">
-                                            <div class="bg-blue-50 text-xs p-2 rounded text-center">Mon 10:30 AM</div>
-                                            <div class="bg-blue-50 text-xs p-2 rounded text-center">Tue 2:00 PM</div>
-                                            <div class="bg-blue-50 text-xs p-2 rounded text-center">Wed 11:00 AM</div>
-                                            <div class="bg-blue-50 text-xs p-2 rounded text-center">Thu 3:30 PM</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="max-w-3xl text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Let Patients Book Appointments via WhatsApp</h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-8">Premium automated booking, rescheduling, and cancellations — so your team stays focused on care, not admin.</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <a href="#early-access" class="bg-gradient-to-r from-[#14B8A6] to-[#0EA5E9] text-white font-semibold py-3 px-6 rounded-2xl shadow-lg hover:scale-105 transition-transform">
+                    Start Free – 1 Year for Early Clinics
+                </a>
+                <a href="#" class="border border-[#1E293B] text-[#1E293B] py-3 px-6 rounded-2xl hover:bg-gray-100 transition">
+                    Learn More
+                </a>
+            </div>
+        </div>
+        <div class="mt-16 w-full max-w-md bg-[#F1F5F9] p-6 rounded-2xl shadow-xl">
+            <p class="text-sm text-[#14B8A6] mb-2">HalloDoc Assistant</p>
+            <div class="bg-white p-4 rounded-xl text-left space-y-3 text-sm border border-gray-200">
+                <p><strong>HalloDoc:</strong> Hi! I'm your assistant. Would you like to book an appointment with Dr. Miller?</p>
+                <p><strong>You:</strong> Yes, next week please.</p>
+                <p><strong>HalloDoc:</strong> Great! Available slots:</p>
+                <ul class="list-disc list-inside">
+                    <li>Mon 10:30 AM</li>
+                    <li>Tue 2:00 PM</li>
+                    <li>Wed 11:00 AM</li>
+                    <li>Thu 3:30 PM</li>
+                </ul>
             </div>
         </div>
     </section>
