@@ -121,10 +121,31 @@ function initMobileMenu() {
 function initFaqAccordion() {
     const faqToggles = document.querySelectorAll('.faq-toggle');
     
+    // Initially hide all FAQ content
+    document.querySelectorAll('.faq-content').forEach(content => {
+        content.style.display = 'none';
+    });
+    
     faqToggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
             const faqItem = toggle.closest('.glass-card');
+            const faqContent = faqItem.querySelector('.faq-content');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.glass-card.faq-active').forEach(activeItem => {
+                if (activeItem !== faqItem) {
+                    activeItem.classList.remove('faq-active');
+                    activeItem.querySelector('.faq-content').style.display = 'none';
+                }
+            });
+            
+            // Toggle current FAQ
             faqItem.classList.toggle('faq-active');
+            if (faqContent.style.display === 'none') {
+                faqContent.style.display = 'block';
+            } else {
+                faqContent.style.display = 'none';
+            }
         });
     });
 }

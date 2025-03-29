@@ -61,13 +61,16 @@ body {
 
 /* FAQs accordion styles */
 .faq-content {
-    max-height: 0;
+    opacity: 0;
+    height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .faq-active .faq-content {
-    max-height: 300px;
+    opacity: 1;
+    height: auto;
+    padding-top: 0.5rem;
 }
 
 .faq-icon {
