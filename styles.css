@@ -73,25 +73,38 @@ footer .h-20 {
     transform: translateZ(40px) rotateY(-5deg);
 }
 
-/* FAQs accordion styles */
+/* Enhanced FAQ accordion styles for smoother animation */
 .faq-content {
-    display: none !important; /* Force hide by default */
+    max-height: 0;
+    display: block !important; /* Override the display:none to allow for transitions */
     opacity: 0;
     overflow: hidden;
-    transition: opacity 0.3s ease;
+    transition: max-height 0.5s ease-in-out, opacity 0.4s ease-in-out, padding 0.3s ease;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
 }
 
 .faq-active .faq-content {
-    display: block !important; /* Force show when active */
+    max-height: 300px; /* Large enough to contain content but still allow animation */
     opacity: 1;
     padding-top: 0.5rem;
+    padding-bottom: 1rem;
 }
+
 .faq-icon {
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
 }
 
 .faq-active .faq-icon {
     transform: rotate(45deg);
+}
+
+/* Add a subtle color change to the active FAQ */
+.glass-card.faq-active {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(22, 163, 74, 0.1);
+    transition: background 0.4s ease, border-color 0.4s ease;
 }
 
 /* 3D Button effect */
