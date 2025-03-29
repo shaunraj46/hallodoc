@@ -63,11 +63,11 @@ body {
 .faq-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.5s ease;
 }
 
 .faq-active .faq-content {
-    max-height: 300px;
+    max-height: 500px;
 }
 
 .faq-icon {
