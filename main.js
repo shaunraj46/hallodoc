@@ -124,27 +124,22 @@ function initFaqAccordion() {
     faqToggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
             const faqItem = toggle.closest('.glass-card');
-            const faqContent = faqItem.querySelector('.faq-content');
             
             // Close all other FAQs
             document.querySelectorAll('.glass-card.faq-active').forEach(activeItem => {
                 if (activeItem !== faqItem) {
                     activeItem.classList.remove('faq-active');
-                    activeItem.querySelector('.faq-content').style.display = 'none';
                 }
             });
             
-            // Toggle current FAQ
-            const isCurrentlyActive = faqItem.classList.contains('faq-active');
-            
-            if (isCurrentlyActive) {
-                // If it's active, close it
+            // Toggle current FAQ with a slight delay for better visual effect
+            if (faqItem.classList.contains('faq-active')) {
                 faqItem.classList.remove('faq-active');
-                faqContent.style.display = 'none';
             } else {
-                // If it's not active, open it
-                faqItem.classList.add('faq-active');
-                faqContent.style.display = 'block';
+                // Small delay before opening to create a nice sequential animation
+                setTimeout(() => {
+                    faqItem.classList.add('faq-active');
+                }, 50);
             }
         });
     });
