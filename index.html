@@ -48,6 +48,24 @@
         }
     </script>
     <link rel="stylesheet" href="styles.css">
+    
+    <!-- Additional FAQ Accordion Styles -->
+    <style>
+        /* FAQs accordion updated styles */
+        .faq-content {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            padding: 0 1rem; /* horizontal padding for spacing from borders */
+            transition: max-height 0.6s ease, opacity 0.6s ease, padding 0.6s ease;
+        }
+        
+        .faq-active .faq-content {
+            max-height: 800px; /* adjust as needed to fit your content */
+            opacity: 1;
+            padding: 1rem; /* uniform padding when expanded */
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
