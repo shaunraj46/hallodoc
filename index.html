@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HalloDoc - WhatsApp Appointment Assistant</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#4ade80',
+                            DEFAULT: '#16a34a',
+                            dark: '#15803d',
+                        },
+                        secondary: {
+                            light: '#60a5fa',
+                            DEFAULT: '#3b82f6',
+                            dark: '#2563eb',
+                        },
+                        neutral: {
+                            lightest: '#f9fafb',
+                            light: '#f3f4f6',
+                            DEFAULT: '#e5e7eb',
+                            dark: '#6b7280',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="flex-shrink-0 flex items-center">
+                        <svg class="h-8 w-auto text-primary-dark" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-6-8a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                        </svg>
+                        <span class="ml-2 text-xl font-semibold text-gray-800">HalloDoc</span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#features" class="text-gray-600 hover:text-primary-dark transition duration-150">Features</a>
+                    <a href="#how-it-works" class="text-gray-600 hover:text-primary-dark transition duration-150">How It Works</a>
+                    <a href="#benefits" class="text-gray-600 hover:text-primary-dark transition duration-150">Benefits</a>
+                    <a href="#faq" class="text-gray-600 hover:text-primary-dark transition duration-150">FAQ</a>
+                    <a href="#early-access" class="bg-primary px-4 py-2 rounded-lg text-white font-medium shadow-md hover:bg-primary-dark transition duration-150">Get Started</a>
+                </div>
+                <div class="flex md:hidden items-center">
+                    <button type="button" class="mobile-menu-button p-2 rounded-md text-gray-600 hover:text-primary-dark">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu, show/hide based on menu state -->
+        <div class="mobile-menu hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#features" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary-dark">Features</a>
+                <a href="#how-it-works" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary-dark">How It Works</a>
+                <a href="#benefits" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary-dark">Benefits</a>
+                <a href="#faq" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary-dark">FAQ</a>
+                <a href="#early-access" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-primary hover:bg-primary-dark">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Three.js Canvas -->
+    <section class="pt-24 pb-20 md:pt-32 md:pb-28 relative overflow-hidden">
+        <canvas id="hero-canvas" class="absolute top-0 left-0 w-full h-full -z-10"></canvas>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight">Let Patients Book Appointments via WhatsApp</h1>
+                    <p class="mt-4 text-xl text-gray-600">Automated booking, rescheduling, and cancellations — so your team doesn't have to answer every call or email.</p>
+                    <div class="mt-8 flex flex-wrap gap-4">
+                        <a href="#early-access" class="btn-3d px-6 py-3 bg-primary text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition duration-300">
+                            Start Free – 1 Year for Early Clinics
+                        </a>
+                        <a href="#" class="flex items-center px-5 py-3 bg-white text-primary-dark font-medium rounded-lg shadow hover:shadow-md transition duration-300">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.498 14.382c-.301-.15-1.767-.867-2.04-.966-.273-.101-.473-.15-.673.15-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.523.146-.181.194-.301.297-.496.1-.21.049-.394-.025-.554-.075-.164-.672-1.621-.922-2.22-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.019-1.045 2.475s1.07 2.865 1.219 3.075c.149.18 2.095 3.195 5.076 4.483.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.57-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                            </svg>
+                            Chat on WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="chat-bubble reveal reveal-delay-1">
+                    <div class="chat-bubble-inner relative">
+                        <!-- Phone mockup with 3D effect -->
+                        <div class="bg-white p-4 rounded-3xl shadow-2xl transform rotate-3 floating">
+                            <!-- Phone Screen -->
+                            <div class="bg-gray-100 rounded-2xl overflow-hidden border-8 border-white">
+                                <!-- WhatsApp header -->
+                                <div class="bg-primary p-3 flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center mr-3">
+                                        <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 012.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.188 8.188 0 01-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24z"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">HalloDoc Assistant</p>
+                                        <p class="text-green-100 text-xs">Online</p>
+                                    </div>
+                                </div>
+                                <!-- Chat messages -->
+                                <div class="p-3 space-y-3">
+                                    <div class="bg-white p-2 rounded-lg rounded-bl-none max-w-[80%] shadow-sm">
+                                        <p class="text-sm">👋 Hi! I'm your HalloDoc Assistant. Would you like to book an appointment with Dr. Miller?</p>
+                                    </div>
+                                    <div class="bg-green-100 p-2 rounded-lg rounded-br-none max-w-[80%] ml-auto shadow-sm">
+                                        <p class="text-sm">Yes, I need an appointment for next week.</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded-lg rounded-bl-none max-w-[80%] shadow-sm">
+                                        <p class="text-sm">Great! Here are available slots next week:</p>
+                                        <div class="mt-2 grid grid-cols-2 gap-2">
+                                            <div class="bg-blue-50 text-xs p-2 rounded text-center">Mon 10:30 AM</div>
+                                            <div class="bg-blue-50 text-xs p-2 rounded text-center">Tue 2:00 PM</div>
+                                            <div class="bg-blue-50 text-xs p-2 rounded text-center">Wed 11:00 AM</div>
+                                            <div class="bg-blue-50 text-xs p-2 rounded text-center">Thu 3:30 PM</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto reveal">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">The Problem with Traditional Booking</h2>
+                <p class="text-lg text-gray-600 mb-12">Medical practices spend hours each day handling appointment calls, emails, and managing various booking platforms.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mt-8">
+                <!-- Problem Card 1 -->
+                <div class="glass-card p-6 rounded-xl reveal reveal-delay-1">
+                    <div class="w-14 h-14 bg-red-50 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Time Consumption</h3>
+                    <p class="text-gray-600">Your staff spends 2-3 hours daily on the phone managing appointments instead of focusing on patient care.</p>
+                </div>
+                
+                <!-- Problem Card 2 -->
+                <div class="glass-card p-6 rounded-xl reveal reveal-delay-2">
+                    <div class="w-14 h-14 bg-orange-50 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Expensive Software</h3>
+                    <p class="text-gray-600">Current booking solutions cost €200+ monthly and require patients to download yet another app or create accounts.</p>
+                </div>
+                
+                <!-- Problem Card 3 -->
+                <div class="glass-card p-6 rounded-xl reveal reveal-delay-3">
+                    <div class="w-14 h-14 bg-purple-50 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-8 h-8 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Missed Opportunities</h3>
+                    <p class="text-gray-600">Up to 30% of calls go unanswered during busy hours, resulting in lost appointments and dissatisfied patients.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1 reveal">
+                    <!-- 3D solution visualization -->
+                    <div class="relative perspective-element">
+                        <div class="bg-white p-6 rounded-2xl shadow-xl transform rotate-2 floating">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="col-span-2">
+                                    <div class="bg-blue-50 p-3 rounded-xl">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
+                                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/>
+                                                </svg>
+                                            </div>
+                                            <p class="ml-3 font-medium text-gray-700">Calendar Integration</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="bg-green-50 h-24 p-3 rounded-xl">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                                    <path d="M17.527 10.016c-.5-.093-1.914-.878-2.207-.975-.281-.106-.484-.159-.69.158-.197.31-.797.976-.979 1.189-.182.213-.369.244-.869.083-.5-.164-2.102-.775-4.004-2.473-1.48-1.32-2.478-2.952-2.769-3.454-.282-.5-.031-.772.214-1.022.218-.227.484-.594.726-.89.242-.29.322-.503.484-.836.162-.338.081-.636-.04-.889-.122-.253-1.126-2.705-1.542-3.705-.408-.982-.813-.85-1.126-.85-.282-.008-.604-.008-.927-.008-.322 0-.845.12-1.289.595-.442.477-1.702 1.663-1.702 4.055s1.745 4.7 1.986 5.029c.24.328 3.402 5.213 8.246 7.32 1.158.5 2.055.805 2.754 1.029 1.158.368 2.215.316 3.048.192.93-.137 2.865-1.172 3.266-2.295.408-1.128.408-2.092.282-2.295-.123-.203-.447-.327-.95-.524M12.028 21.927h-.003a11.318 11.318 0 01-5.769-1.584l-.416-.248-4.274 1.117 1.136-4.162-.271-.432a11.478 11.478 0 01-1.752-6.14C.68 4.86 5.497.033 11.12.033a10.375 10.375 0 017.375 3.053 10.434 10.434 0 013.064 7.428c-.004 5.618-4.564 10.199-9.532 10.413M20.4 3.482a12.51 12.51 0 00-8.91-3.694C4.689-.212 0 4.488 0 10.292c-.004 1.812.462 3.58 1.356 5.144L0 24l8.75-2.297a12.38 12.38 0 005.932 1.512h.004c6.8 0 12.332-5.54 12.337-12.345a12.33 12.33 0 00-3.623-8.734z"/>
+                                                </svg>
+                                            </div>
+                                            <p class="ml-2 font-medium text-sm text-gray-700">WhatsApp</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="bg-indigo-50 h-24 p-3 rounded-xl">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                                </svg>
+                                            </div>
+                                            <p class="ml-2 font-medium text-sm text-gray-700">Reminders</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Chat message bubbles -->
+                            <div class="mt-4 space-y-3">
+                                <div class="bg-gray-100 p-2.5 rounded-lg rounded-bl-none w-3/4">
+                                    <p class="text-sm">Hello! Would you like to book, reschedule, or cancel an appointment?</p>
+                                </div>
+                                <div class="bg-primary-light bg-opacity-20 p-2.5 rounded-lg rounded-br-none w-3/4 ml-auto">
+                                    <p class="text-sm">I need to reschedule my appointment from tomorrow.</p>
+                                </div>
+                                <div class="bg-gray-100 p-2.5 rounded-lg rounded-bl-none w-3/4">
+                                    <p class="text-sm">I can help with that. Here are available slots this week...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 reveal reveal-delay-1">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-6">Meet Your WhatsApp Appointment Assistant</h2>
+                    <p class="text-lg text-gray-600 mb-6">HalloDoc integrates directly with WhatsApp to automate your appointment management without requiring patients to download new apps.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="ml-3 text-gray-700">Patients book, reschedule, or cancel appointments 24/7 via WhatsApp</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="ml-3 text-gray-700">Automatic synchronization with your existing calendar systems</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="ml-3 text-gray-700">Smart reminders and follow-ups to reduce no-shows by up to 40%</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="ml-3 text-gray-700">Keep your staff focused on patient care, not phone calls</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">How It Works</h2>
+                <p class="text-lg text-gray-600">Simple 3-step setup gets your virtual appointment assistant running in less than a day.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="relative reveal reveal-delay-1">
+                    <div class="glass-card p-8 rounded-xl relative z-10 h-full">
+                        <div class="w-16 h-16 bg-primary-light bg-opacity-20 rounded-full flex items-center justify-center mb-6 feature-icon">
+                            <span class="text-2xl font-bold text-primary-dark">1</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Connect Your Calendar</h3>
+                        <p class="text-gray-600">We integrate with Google Calendar, Outlook, or your existing practice management software.</p>
+                    </div>
+                    <!-- Arrow for desktop -->
+                    <div class="hidden md:block absolute top-1/2 -right-12 transform -translate-y-1/2 z-0">
+                        <svg class="w-24 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="relative reveal reveal-delay-2">
+                    <div class="glass-card p-8 rounded-xl relative z-10 h-full">
+                        <div class="w-16 h-16 bg-primary-light bg-opacity-20 rounded-full flex items-center justify-center mb-6 feature-icon">
+                            <span class="text-2xl font-bold text-primary-dark">2</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Customize Your Assistant</h3>
+                        <p class="text-gray-600">Define your appointment types, durations, available slots, and customized messages.</p>
+                    </div>
+                    <!-- Arrow for desktop -->
+                    <div class="hidden md:block absolute top-1/2 -right-12 transform -translate-y-1/2 z-0">
+                        <svg class="w-24 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="reveal reveal-delay-3">
+                    <div class="glass-card p-8 rounded-xl relative z-10 h-full">
+                        <div class="w-16 h-16 bg-primary-light bg-opacity-20 rounded-full flex items-center justify-center mb-6 feature-icon">
+                            <span class="text-2xl font-bold text-primary-dark">3</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-4">Share With Patients</h3>
+                        <p class="text-gray-600">Add the booking link to your website or share it directly with patients to start booking via WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Benefits That Matter</h2>
+                <p class="text-lg text-gray-600">We've designed HalloDoc to solve real problems for medical practices.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Benefit 1 -->
+                <div class="glass-card p-5 rounded-xl feature-card reveal reveal-delay-1">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4 feature-icon">
+                        <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">No App Required</h3>
+                    <p class="text-gray-600 text-sm">Uses WhatsApp—already on 90% of patients' phones</p>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="glass-card p-5 rounded-xl feature-card reveal reveal-delay-1">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4 feature-icon">
+                        <svg class="w-6 h-6 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">GDPR-Compliant</h3>
+                    <p class="text-gray-600 text-sm">Fully compliant with European data protection regulations</p>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="glass-card p-5 rounded-xl feature-card reveal reveal-delay-2">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 feature-icon">
+                        <svg class="w-6 h-6 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Hosted in Germany</h3>
+                    <p class="text-gray-600 text-sm">Highest standard of data security and privacy protection</p>
+                </div>
+                
+                <!-- Benefit 4 -->
+                <div class="glass-card p-5 rounded-xl feature-card reveal reveal-delay-2">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4 feature-icon">
+                        <svg class="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 14a6 6 0 100-12 6 6 0 000 12zm1-6a1 1 0 11-2 0 1 1 0 012 0zm-1-4a1 1 0 00-1 1v2a1 1 0 102 0V7a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">24/7 Availability</h3>
+                    <p class="text-gray-600 text-sm">Patients can book anytime, even outside office hours</p>
+                </div>
+                
+                <!-- Benefit 5 -->
+                <div class="glass-card p-5 rounded-xl feature-card reveal reveal-delay-3">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4 feature-icon">
+                        <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Multilingual</h3>
+                    <p class="text-gray-600 text-sm">Supports German, English, Turkish, and more languages</p>
+                </div>
+                
+                <!-- Benefit 6 -->
+                <div class="glass-card p-5 rounded-xl feature-card reveal reveal-delay-3">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4 feature-icon">
+                        <svg class="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Reduces No-Shows</h3>
+                    <p class="text-gray-600 text-sm">Automatic reminders 24 hours before appointments</p>
+                </div>
+                
+                <!-- Benefit 7 -->
+                <div class="glass-card p-5 rounded-xl feature-card reveal reveal-delay-4">
+                    <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-4 feature-icon">
+                        <svg class="w-6 h-6 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Easy Integration</h3>
+                    <p class="text-gray-600 text-sm">Works with your existing calendar and practice software</p>
+                </div>
+                
+                <!-- Benefit 8 -->
+                <div class="glass-card p-5 rounded-xl feature-card reveal reveal-delay-4">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4 feature-icon">
+                        <svg class="w-6 h-6 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Full Support</h3>
+                    <p class="text-gray-600 text-sm">Personalized onboarding and ongoing technical support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Early Access Offer -->
+    <section id="early-access" class="py-16 bg-gradient-to-b from-primary-dark to-green-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div class="mb-8 md:mb-0 md:mr-8 reveal">
+                    <h2 class="text-3xl font-bold mb-4">Limited Time Offer</h2>
+                    <p class="text-xl mb-6">Get 12 months free for the first 5 clinics in Ingolstadt!</p>
+                    <ul class="space-y-3 mb-6">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-300 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="ml-2">No setup or hidden fees</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-300 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="ml-2">Priority access to new features</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-300 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="ml-2">Cancel anytime, no long-term commitment</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="glass-card bg-white bg-opacity-10 p-6 rounded-xl max-w-md w-full reveal reveal-delay-1">
+                    <h3 class="text-xl font-semibold mb-4">Request Early Access</h3>
+                    <form>
+                        <div class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium mb-1">Clinic Name</label>
+                                <input type="text" id="name" class="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-light" placeholder="Your clinic name">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-1">Email Address</label>
+                                <input type="email" id="email" class="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-light" placeholder="your@email.com">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium mb-1">Phone Number</label>
+                                <input type="tel" id="phone" class="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-light" placeholder="+49">
+                            </div>
+                            <div>
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="h-4 w-4 text-primary focus:ring-primary">
+                                    <span class="ml-2 text-sm">I agree to the privacy policy and terms</span>
+                                </label>
+                            </div>
+                            <button type="button" class="btn-3d w-full py-3 rounded-lg bg-white text-primary-dark font-semibold hover:bg-opacity-90 transition duration-300 shadow-lg">
+                                Reserve My Spot
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs Section -->
+    <section id="faq" class="py-16 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h2>
+                <p class="text-lg text-gray-600">Everything you need to know about our WhatsApp appointment assistant.</p>
+            </div>
+            
+            <div class="space-y-6">
+                <!-- FAQ 1 -->
+                <div class="glass-card rounded-xl reveal reveal-delay-1">
+                    <button class="faq-toggle w-full px-6 py-4 flex items-center justify-between focus:outline-none">
+                        <h3 class="text-lg font-semibold text-gray-800">How does the WhatsApp integration work?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </button>
+                    <div class="faq-content px-6 pb-4">
+                        <p class="text-gray-600">HalloDoc uses WhatsApp's official Business API to create a seamless booking experience. Patients chat with your appointment assistant just like they would message a friend. The bot handles the entire conversation flow, from asking what type of appointment they need to showing available slots and confirming bookings.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 2 -->
+                <div class="glass-card rounded-xl reveal reveal-delay-1">
+                    <button class="faq-toggle w-full px-6 py-4 flex items-center justify-between focus:outline-none">
+                        <h3 class="text-lg font-semibold text-gray-800">Can I customize the booking flow and messages?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </button>
+                    <div class="faq-content px-6 pb-4">
+                        <p class="text-gray-600">Yes! You can fully customize the chatbot's responses, available appointment types, durations, working hours, and more. We'll help you set up the system to match your clinic's specific workflow and communication style.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 3 -->
+                <div class="glass-card rounded-xl reveal reveal-delay-2">
+                    <button class="faq-toggle w-full px-6 py-4 flex items-center justify-between focus:outline-none">
+                        <h3 class="text-lg font-semibold text-gray-800">What if a patient has a complex request?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </button>
+                    <div class="faq-content px-6 pb-4">
+                        <p class="text-gray-600">The system is designed to handle routine bookings automatically. For complex requests, the chatbot can recognize when human assistance is needed and will forward the conversation to your staff. You won't miss any important patient communications.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 4 -->
+                <div class="glass-card rounded-xl reveal reveal-delay-2">
+                    <button class="faq-toggle w-full px-6 py-4 flex items-center justify-between focus:outline-none">
+                        <h3 class="text-lg font-semibold text-gray-800">How much does it cost after the free year?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </button>
+                    <div class="faq-content px-6 pb-4">
+                        <p class="text-gray-600">After your free year, plans start at €69/month for small practices. We offer tiered pricing based on the number of practitioners and appointment volume. You'll receive a reminder before your free period ends, with no obligation to continue.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 5 -->
+                <div class="glass-card rounded-xl reveal reveal-delay-3">
+                    <button class="faq-toggle w-full px-6 py-4 flex items-center justify-between focus:outline-none">
+                        <h3 class="text-lg font-semibold text-gray-800">Is patient data secure and GDPR-compliant?</h3>
+                        <svg class="faq-icon w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                    </button>
+                    <div class="faq-content px-6 pb-4">
+                        <p class="text-gray-600">Absolutely. We take data protection very seriously. All data is stored on secure servers in Germany, fully compliant with GDPR and medical data protection regulations. We use end-to-end encryption for all communications, and we never sell or share patient data with third parties.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <a href="#" class="flex items-center mb-4">
+                        <svg class="h-8 w-auto text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-6-8a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                        </svg>
+                        <span class="ml-2 text-xl font-semibold">HalloDoc</span>
+                    </a>
+                    <p class="text-gray-400 text-sm">Making appointment booking easier for clinics and patients through WhatsApp.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Product</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#features" class="hover:text-white transition">Features</a></li>
+                        <li><a href="#how-it-works" class="hover:text-white transition">How It Works</a></li>
+                        <li><a href="#benefits" class="hover:text-white transition">Benefits</a></li>
+                        <li><a href="#faq" class="hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition">Impressum</a></li>
+                        <li><a href="#" class="hover:text-white transition">GDPR Compliance</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-gray-400 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            </svg>
+                            <a href="mailto:info@hallodoc.de" class="hover:text-white transition">info@hallodoc.de</a>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-gray-400 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                            </svg>
+                            <a href="tel:+4918012345678" class="hover:text-white transition">+49 180 123 456 78</a>
+                        </li>
+                    </ul>
+                    <div class="mt-4 flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row md:justify-between md:items-center">
+                <p class="text-gray-400 text-sm">© 2025 HalloDoc. All rights reserved.</p>
+                <p class="text-gray-400 text-sm mt-2 md:mt-0">Made with ❤️ in Ingolstadt, Germany</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>
