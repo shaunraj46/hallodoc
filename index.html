@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HalloDoc - WhatsApp Appointment Assistant</title>
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <!-- GSAP for animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
@@ -52,10 +50,7 @@
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <a href="#" class="flex-shrink-0 flex items-center">
-                        <svg class="h-8 w-auto text-primary-dark" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-6-8a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                        </svg>
-                        <span class="ml-2 text-xl font-semibold text-gray-800">HalloDoc</span>
+                        <img src="images/hallodoc-logo.png" alt="HalloDoc Logo" class="h-8 w-auto">
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-6">
@@ -87,9 +82,11 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Three.js Canvas -->
+    <!-- Hero Section with Background Image -->
     <section class="pt-24 pb-20 md:pt-32 md:pb-28 relative overflow-hidden">
-        <canvas id="hero-canvas" class="absolute top-0 left-0 w-full h-full -z-10"></canvas>
+        <div class="absolute top-0 left-0 w-full h-full -z-10">
+            <img src="images/hero-background.png" alt="Background" class="w-full h-full object-cover" />
+        </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="reveal">
@@ -591,10 +588,7 @@
             <div class="grid md:grid-cols-4 gap-8">
                 <div>
                     <a href="#" class="flex items-center mb-4">
-                        <svg class="h-8 w-auto text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm4 0h-2v-6h2v6zm-6-8a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm8 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                        </svg>
-                        <span class="ml-2 text-xl font-semibold">HalloDoc</span>
+                        <img src="images/hallodoc-logo.png" alt="HalloDoc Logo" class="h-8 w-auto">
                     </a>
                     <p class="text-gray-400 text-sm">Making appointment booking easier for clinics and patients through WhatsApp.</p>
                 </div>
