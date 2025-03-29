@@ -73,23 +73,18 @@ footer .h-20 {
     transform: translateZ(40px) rotateY(-5deg);
 }
 
-/* Enhanced FAQ accordion styles for smoother animation */
+/* FAQs accordion styles */
 .faq-content {
-    max-height: 0;
-    display: block !important; /* Override the display:none to allow for transitions */
+    display: none !important; /* Force hide by default */
     opacity: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-in-out, opacity 0.4s ease-in-out, padding 0.3s ease;
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-top: 0;
+    transition: opacity 0.3s ease;
 }
 
 .faq-active .faq-content {
-    max-height: 300px; /* Large enough to contain content but still allow animation */
+    display: block !important; /* Force show when active */
     opacity: 1;
     padding-top: 0.5rem;
-    padding-bottom: 1rem;
 }
 
 .faq-icon {
