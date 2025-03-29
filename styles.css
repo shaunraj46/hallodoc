@@ -1,16 +1,10 @@
-/* 
- * HalloDoc - WhatsApp Appointment Assistant
- * Main Stylesheet
- */
-
-/* Base Styles */
+/* Custom styles beyond Tailwind */
 body {
     font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
-    color: #333;
 }
 
-/* Logo Styles - Fixes overflow and resizing issues */
+/* Logo fixes - only changes to original CSS */
 nav .h-20 {
     height: 3.5rem; /* Reduced from 5rem (h-20) for better fit */
     width: auto;
@@ -24,46 +18,12 @@ footer .h-20 {
     object-fit: contain;
 }
 
-/* Add premium look to logos */
-nav img, footer img {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1)) brightness(1.02);
-    transition: filter 0.3s ease;
+/* Hero section background */
+.gradient-bg {
+    background: linear-gradient(120deg, #f0f9ff 0%, #e6f7ff 100%);
 }
 
-nav a:hover img, footer a:hover img {
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15)) brightness(1.05);
-}
-
-/* Logo container spacing */
-nav .flex-shrink-0 {
-    display: flex;
-    align-items: center;
-    padding: 0.25rem 0;
-}
-
-footer a.flex {
-    display: inline-flex;
-    align-items: center;
-}
-
-/* Hero Section Styles */
-.hero-bg {
-    position: relative;
-    overflow: hidden;
-}
-
-.hero-bg::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
-    z-index: 0;
-}
-
-/* Button Styles */
+/* Primary buttons */
 .btn-primary {
     background: linear-gradient(90deg, #16a34a 0%, #15803d 100%);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -72,23 +32,6 @@ footer a.flex {
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 16px rgba(21, 128, 61, 0.2);
-}
-
-/* 3D Button effect */
-.btn-3d {
-    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.btn-3d:hover {
-    transform: perspective(1000px) rotateX(5deg) rotateY(-5deg) translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.btn-3d:active {
-    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(1px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Glass effect cards */
@@ -105,22 +48,14 @@ footer a.flex {
     box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
 }
 
-/* Feature cards and icons */
-.feature-card {
-    transition: all 0.3s ease;
-}
-
+/* Feature icons */
 .feature-icon {
     filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.1));
     transition: transform 0.3s ease;
 }
 
-.feature-card:hover {
-    background: rgba(255, 255, 255, 0.9);
-}
-
 .feature-card:hover .feature-icon {
-    transform: translateY(-5px) scale(1.05);
+    transform: translateY(-5px);
 }
 
 /* 3D Chat bubble effect */
@@ -138,34 +73,19 @@ footer a.flex {
     transform: translateZ(40px) rotateY(-5deg);
 }
 
-/* Floating animation */
-@keyframes float {
-    0% { transform: translateY(0px) rotate(3deg); }
-    50% { transform: translateY(-10px) rotate(3deg); }
-    100% { transform: translateY(0px) rotate(3deg); }
-}
-
-.floating {
-    animation: float 5s ease-in-out infinite;
-}
-
 /* FAQs accordion styles */
 .faq-content {
-    max-height: 0;
+    display: none !important; /* Force hide by default */
     opacity: 0;
     overflow: hidden;
-    transition: all 0.5s ease;
-    padding-top: 0;
-    padding-bottom: 0;
+    transition: opacity 0.3s ease;
 }
 
 .faq-active .faq-content {
-    max-height: 500px;
+    display: block !important; /* Force show when active */
     opacity: 1;
-    padding-top: 1rem;
-    padding-bottom: 1.5rem;
+    padding-top: 0.5rem;
 }
-
 .faq-icon {
     transition: transform 0.3s ease;
 }
@@ -174,12 +94,28 @@ footer a.flex {
     transform: rotate(45deg);
 }
 
-.glass-card.faq-active {
-    background: rgba(255, 255, 255, 0.95);
-    border-color: rgba(22, 163, 74, 0.1);
+/* 3D Button effect */
+.btn-3d {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
+    transition: transform 0.3s ease;
 }
 
-/* Scroll reveal animations */
+.btn-3d:hover {
+    transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
+}
+
+/* Custom animations */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.floating {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Scroll animation classes */
 .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -207,161 +143,23 @@ footer a.flex {
     transition-delay: 0.8s;
 }
 
-/* Navigation Improvements */
-nav {
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-nav.scrolled {
-    background-color: rgba(255, 255, 255, 0.95) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-nav a {
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #16a34a;
-    transition: width 0.3s ease;
-}
-
-nav a:hover::after {
-    width: 100%;
-}
-
-/* Form elements styling */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-select,
-textarea {
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-select:focus,
-textarea:focus {
-    border-color: #16a34a;
-    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
-    outline: none;
-}
-
-/* Checkbox styling */
-input[type="checkbox"] {
-    position: relative;
-    cursor: pointer;
-}
-
-input[type="checkbox"]:checked {
-    border-color: #16a34a;
-    background-color: #16a34a;
-}
-
-/* Mobile menu improvements */
-.mobile-menu {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    transform-origin: top center;
-}
-
-.mobile-menu.hidden {
-    opacity: 0;
-    transform: scaleY(0);
-    display: block !important;
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
-}
-
-.mobile-menu:not(.hidden) {
-    opacity: 1;
-    transform: scaleY(1);
-    visibility: visible;
-    height: auto;
-}
-
-/* Footer refinements */
-footer {
-    position: relative;
-    overflow: hidden;
-}
-
-footer::before {
-    content: '';
+/* 3D canvas */
+#hero-canvas {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 70% 20%, rgba(22, 163, 74, 0.05) 0%, transparent 70%);
-    pointer-events: none;
+    z-index: -1;
 }
 
-/* Media Queries */
+/* Mobile responsiveness */
 @media (max-width: 768px) {
     .floating {
         animation: none;
     }
     
     .chat-bubble-inner {
-        transform: none !important;
-    }
-    
-    /* Improve mobile navigation */
-    nav .h-20 {
-        height: 2.75rem; /* Smaller on mobile */
-    }
-    
-    .btn-3d {
-        transform: none !important;
-    }
-    
-    .glass-card:hover {
-        transform: translateY(-2px); /* Less dramatic on mobile */
-    }
-    
-    /* Better spacing for mobile */
-    section {
-        padding-top: 3rem;
-        padding-bottom: 3rem;
-    }
-    
-    /* Ensure inputs are properly sized on mobile */
-    input, select, textarea {
-        font-size: 16px !important; /* Prevents iOS zoom on focus */
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    /* Tablet specific adjustments */
-    nav .h-20 {
-        height: 3rem;
-    }
-    
-    section {
-        padding-top: 4rem;
-        padding-bottom: 4rem;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    /* Respect user preferences for reduced motion */
-    .floating, 
-    .btn-3d:hover,
-    .glass-card:hover,
-    .feature-card:hover,
-    .reveal {
-        animation: none !important;
-        transition: none !important;
         transform: none !important;
     }
 }
