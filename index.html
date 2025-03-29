@@ -8,9 +8,11 @@
     <meta http-equiv="Expires" content="0">
     <title>HalloDoc - WhatsApp Appointment Assistant</title>
     
-    <!-- Force favicon refresh with random query parameter -->
-    <link rel="icon" href="favicon.ico?v=2" type="image/x-icon">
-    <link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon">
+    <!-- Force favicon refresh with random query parameter and explicit version -->
+    <link rel="icon" href="favicon.ico?v=3" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico?v=3" type="image/x-icon">
+    <!-- Also include the PNG version as a fallback -->
+    <link rel="icon" href="favicon.png?v=3" type="image/png">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -676,7 +678,10 @@
             
             <div class="border-t border-gray-700 mt-8 pt-6 flex flex-col md:flex-row md:justify-between md:items-center">
                 <p class="text-gray-400 text-sm">© 2025 HalloDoc. All rights reserved.</p>
-                <p class="text-gray-400 text-sm mt-2 md:mt-0">Made by SpicyNuggets</p>
+                <div class="mt-2 md:mt-0 flex items-center">
+                    <span class="text-gray-400 text-sm mr-2">Made by</span>
+                    <img src="images/spicynuggets-logo.png" alt="SpicyNuggets" class="h-6 w-auto" />
+                </div>
             </div>
         </div>
     </footer>
