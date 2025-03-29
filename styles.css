@@ -61,18 +61,17 @@ body {
 
 /* FAQs accordion styles */
 .faq-content {
+    display: none !important; /* Force hide by default */
     opacity: 0;
-    height: 0;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 .faq-active .faq-content {
+    display: block !important; /* Force show when active */
     opacity: 1;
-    height: auto;
     padding-top: 0.5rem;
 }
-
 .faq-icon {
     transition: transform 0.3s ease;
 }
