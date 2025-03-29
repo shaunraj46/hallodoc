@@ -121,125 +121,19 @@ function initMobileMenu() {
 function initFaqAccordion() {
     const faqToggles = document.querySelectorAll('.faq-toggle');
     
-    // Initialize - hide all content initially and set up for animations
-    document.querySelectorAll('.faq-content').forEach(content => {
-        // Initial setup
-        gsap.set(content, { 
-            height: 0, 
-            opacity: 0,
-            paddingTop: 0,
-            paddingBottom: 0,
-            overflow: 'hidden'
-        });
-    });
-    
     faqToggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
             const faqItem = toggle.closest('.glass-card');
-            const faqContent = faqItem.querySelector('.faq-content');
-            const isActive = faqItem.classList.contains('faq-active');
-            const icon = toggle.querySelector('.faq-icon');
             
-            // Close any open FAQs first
+            // Close all other FAQs first
             document.querySelectorAll('.glass-card.faq-active').forEach(activeItem => {
                 if (activeItem !== faqItem) {
-                    const activeContent = activeItem.querySelector('.faq-content');
-                    const activeIcon = activeItem.querySelector('.faq-icon');
-                    
-                    // Remove active class
                     activeItem.classList.remove('faq-active');
-                    
-                    // Animate closing with GSAP
-                    gsap.to(activeContent, {
-                        height: 0,
-                        opacity: 0,
-                        paddingTop: 0,
-                        paddingBottom: 0,
-                        duration: 0.4,
-                        ease: "power2.out"
-                    });
-                    
-                    // Rotate icon back
-                    gsap.to(activeIcon, {
-                        rotation: 0,
-                        duration: 0.4,
-                        ease: "back.out(1.7)"
-                    });
-                    
-                    // Subtle card animation
-                    gsap.to(activeItem, {
-                        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
-                        backgroundColor: "rgba(255, 255, 255, 0.8)",
-                        duration: 0.4,
-                        ease: "power1.out"
-                    });
                 }
             });
             
             // Toggle current FAQ
-            if (isActive) {
-                // Close this FAQ
-                faqItem.classList.remove('faq-active');
-                
-                // Animate with GSAP
-                gsap.to(faqContent, {
-                    height: 0,
-                    opacity: 0,
-                    paddingTop: 0,
-                    paddingBottom: 0,
-                    duration: 0.4,
-                    ease: "power2.out"
-                });
-                
-                // Rotate icon back
-                gsap.to(icon, {
-                    rotation: 0,
-                    duration: 0.4,
-                    ease: "back.out(1.7)"
-                });
-                
-                // Subtle card animation
-                gsap.to(faqItem, {
-                    boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
-                    backgroundColor: "rgba(255, 255, 255, 0.8)",
-                    duration: 0.4,
-                    ease: "power1.out"
-                });
-                
-            } else {
-                // Open this FAQ
-                faqItem.classList.add('faq-active');
-                
-                // First, measure the natural height
-                gsap.set(faqContent, { height: "auto", opacity: 0, paddingTop: "0.75rem", paddingBottom: "1.5rem" });
-                const height = faqContent.offsetHeight;
-                gsap.set(faqContent, { height: 0, opacity: 0, paddingTop: 0, paddingBottom: 0 });
-                
-                // Then animate to that height
-                gsap.to(faqContent, {
-                    height: height,
-                    opacity: 1,
-                    paddingTop: "0.75rem",
-                    paddingBottom: "1.5rem",
-                    duration: 0.5,
-                    ease: "power2.out"
-                });
-                
-                // Rotate icon
-                gsap.to(icon, {
-                    rotation: 45,
-                    duration: 0.5,
-                    ease: "back.out(1.7)" // Bouncy effect
-                });
-                
-                // Enhance card with subtle animation
-                gsap.to(faqItem, {
-                    boxShadow: "0 12px 36px rgba(0, 0, 0, 0.12)",
-                    backgroundColor: "rgba(255, 255, 255, 0.95)",
-                    duration: 0.5,
-                    ease: "power1.out"
-                });
-            }
+            faqItem.classList.toggle('faq-active');
         });
     });
 }
