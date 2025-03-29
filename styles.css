@@ -74,19 +74,18 @@ footer .h-20 {
 }
 
 /* FAQs accordion styles */
-/* FAQs accordion styles */
 .faq-content {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    padding-top: 0; /* No padding when collapsed */
-    transition: max-height 0.4s ease, opacity 0.4s ease, padding-top 0.4s ease;
+    padding: 0 1rem; /* horizontal padding to keep text away from edges */
+    transition: max-height 0.6s ease, opacity 0.6s ease, padding 0.6s ease;
 }
 
 .faq-active .faq-content {
-    max-height: 500px; /* Set this high enough for your content */
+    max-height: 800px; /* adjust this value to fit your content */
     opacity: 1;
-    padding-top: 0.5rem;
+    padding: 1rem; /* uniform padding for a smoother, spacious look */
 }
 
 
