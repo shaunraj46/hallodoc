@@ -124,12 +124,6 @@
                         <a href="#early-access" class="btn-3d px-6 py-3 bg-primary text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition duration-300">
                             Start Free – 1 Year for Early Clinics
                         </a>
-                        <a href="#" class="flex items-center px-5 py-3 bg-white text-primary-dark font-medium rounded-lg shadow hover:shadow-md transition duration-300">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M17.498 14.382c-.301-.15-1.767-.867-2.04-.966-.273-.101-.473-.15-.673.15-.197.295-.771.964-.944 1.162-.175.195-.349.21-.646.075-.3-.15-1.263-.465-2.403-1.485-.888-.795-1.484-1.77-1.66-2.07-.174-.3-.019-.465.13-.615.136-.135.301-.345.451-.523.146-.181.194-.301.297-.496.1-.21.049-.394-.025-.554-.075-.164-.672-1.621-.922-2.22-.24-.584-.487-.51-.672-.51-.172-.015-.371-.015-.571-.015-.2 0-.523.074-.797.359-.273.3-1.045 1.019-1.045 2.475s1.07 2.865 1.219 3.075c.149.18 2.095 3.195 5.076 4.483.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.57-.085 1.758-.719 2.006-1.413.248-.694.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-                            </svg>
-                            Chat on WhatsApp
-                        </a>
                     </div>
                 </div>
                 <div class="chat-bubble reveal reveal-delay-1">
@@ -479,7 +473,7 @@
             <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                 <div class="mb-8 md:mb-0 md:mr-8 reveal">
                     <h2 class="text-3xl font-bold mb-4">Limited Time Offer</h2>
-                    <p class="text-xl mb-6">Get 12 months free for the first 5 clinics in Ingolstadt!</p>
+                    <p class="text-xl mb-6">Get 12 months free!</p>
                     <ul class="space-y-3 mb-6">
                         <li class="flex items-start">
                             <svg class="w-5 h-5 text-green-300 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -503,30 +497,32 @@
                 </div>
                 <div class="glass-card bg-white bg-opacity-10 p-6 rounded-xl max-w-md w-full reveal reveal-delay-1">
                     <h3 class="text-xl font-semibold mb-4">Request Early Access</h3>
-                    <form>
+                    <form action="https://formsubmit.co/shaunraj46@gmail.com" method="POST">
                         <div class="space-y-4">
                             <div>
                                 <label for="name" class="block text-sm font-medium mb-1">Clinic Name</label>
-                                <input type="text" id="name" class="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-light" placeholder="Your clinic name">
+                                <input type="text" id="name" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-light" placeholder="Your clinic name">
                             </div>
                             <div>
                                 <label for="email" class="block text-sm font-medium mb-1">Email Address</label>
-                                <input type="email" id="email" class="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-light" placeholder="your@email.com">
+                                <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-light" placeholder="your@email.com">
                             </div>
                             <div>
                                 <label for="phone" class="block text-sm font-medium mb-1">Phone Number</label>
-                                <input type="tel" id="phone" class="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-light" placeholder="+49">
+                                <input type="tel" id="phone" name="phone" class="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary-light" placeholder="+49">
                             </div>
                             <div>
                                 <label class="flex items-center">
-                                    <input type="checkbox" class="h-4 w-4 text-primary focus:ring-primary">
+                                    <input type="checkbox" name="agree" class="h-4 w-4 text-primary focus:ring-primary">
                                     <span class="ml-2 text-sm">I agree to the privacy policy and terms</span>
                                 </label>
                             </div>
-                            <button type="button" class="btn-3d w-full py-3 rounded-lg bg-white text-primary-dark font-semibold hover:bg-opacity-90 transition duration-300 shadow-lg">
+                            <button type="submit" class="btn-3d w-full py-3 rounded-lg bg-white text-primary-dark font-semibold hover:bg-opacity-90 transition duration-300 shadow-lg">
                                 Reserve My Spot
                             </button>
                         </div>
+                        <input type="hidden" name="_subject" value="New HalloDoc Early Access Request">
+                        <input type="hidden" name="_captcha" value="false">
                     </form>
                 </div>
             </div>
@@ -649,13 +645,13 @@
                                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                             </svg>
-                            <a href="mailto:info@hallodoc.de" class="hover:text-white transition">info@hallodoc.de</a>
+                            <a href="mailto:shaunraj46@gmail.com" class="hover:text-white transition">shaunraj46@gmail.com</a>
                         </li>
                         <li class="flex items-start">
                             <svg class="w-5 h-5 text-gray-400 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                             </svg>
-                            <a href="tel:+4918012345678" class="hover:text-white transition">+49 180 123 456 78</a>
+                            <a href="tel:+491768590486" class="hover:text-white transition">+49 176 859 06 486</a>
                         </li>
                     </ul>
                     <div class="mt-4 flex space-x-4">
