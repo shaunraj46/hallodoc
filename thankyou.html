@@ -117,11 +117,26 @@
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="index.html#features" class="text-gray-600 hover:text-primary-dark transition duration-150">Features</a>
-                    <a href="index.html#how-it-works" class="text-gray-600 hover:text-primary-dark transition duration-150">How It Works</a>
-                    <a href="index.html#benefits" class="text-gray-600 hover:text-primary-dark transition duration-150">Benefits</a>
-                    <a href="index.html#faq" class="text-gray-600 hover:text-primary-dark transition duration-150">FAQ</a>
-                    <a href="index.html#early-access" class="bg-primary px-4 py-2 rounded-lg text-white font-medium shadow-md hover:bg-primary-dark transition duration-150">Get Started</a>
+                    <a href="index.html#features" class="text-gray-600 hover:text-primary-dark transition duration-150" data-i18n="features">Features</a>
+                    <a href="index.html#how-it-works" class="text-gray-600 hover:text-primary-dark transition duration-150" data-i18n="how-it-works">How It Works</a>
+                    <a href="index.html#benefits" class="text-gray-600 hover:text-primary-dark transition duration-150" data-i18n="benefits">Benefits</a>
+                    <a href="index.html#faq" class="text-gray-600 hover:text-primary-dark transition duration-150" data-i18n="faq">FAQ</a>
+                    
+                    <!-- Language toggle for desktop -->
+                    <div class="relative">
+                        <button id="language-toggle" class="flex items-center space-x-1 text-gray-600 hover:text-primary-dark transition duration-150">
+                            <span id="current-language">English</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div id="language-dropdown" class="absolute right-0 mt-2 py-2 w-36 bg-white rounded-lg shadow-xl z-50 hidden">
+                            <a href="#" data-lang="en" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">English</a>
+                            <a href="#" data-lang="de" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Deutsch</a>
+                        </div>
+                    </div>
+                    
+                    <a href="index.html#early-access" class="bg-primary px-4 py-2 rounded-lg text-white font-medium shadow-md hover:bg-primary-dark transition duration-150" data-i18n="get-started">Get Started</a>
                 </div>
                 <div class="flex md:hidden items-center">
                     <button type="button" class="mobile-menu-button p-2 rounded-md text-gray-600 hover:text-primary-dark">
@@ -135,12 +150,25 @@
         
         <!-- Mobile menu, show/hide based on menu state -->
         <div class="mobile-menu hidden md:hidden">
+            <!-- Mobile language toggle -->
+            <div class="px-3 py-2 border-b border-gray-200">
+                <button id="mobile-language-toggle" class="flex items-center space-x-1 text-gray-600">
+                    <span id="mobile-current-language">English</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div id="mobile-language-dropdown" class="mt-2 py-2 bg-gray-50 rounded-lg hidden">
+                    <a href="#" data-lang="en" class="block px-3 py-1 text-gray-800 hover:bg-gray-100">English</a>
+                    <a href="#" data-lang="de" class="block px-3 py-1 text-gray-800 hover:bg-gray-100">Deutsch</a>
+                </div>
+            </div>
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="index.html#features" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary-dark">Features</a>
-                <a href="index.html#how-it-works" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary-dark">How It Works</a>
-                <a href="index.html#benefits" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary-dark">Benefits</a>
-                <a href="index.html#faq" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary-dark">FAQ</a>
-                <a href="index.html#early-access" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-primary hover:bg-primary-dark">Get Started</a>
+                <a href="index.html#features" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary-dark" data-i18n="features">Features</a>
+                <a href="index.html#how-it-works" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary-dark" data-i18n="how-it-works">How It Works</a>
+                <a href="index.html#benefits" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary-dark" data-i18n="benefits">Benefits</a>
+                <a href="index.html#faq" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-primary-dark" data-i18n="faq">FAQ</a>
+                <a href="index.html#early-access" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-primary hover:bg-primary-dark" data-i18n="get-started">Get Started</a>
             </div>
         </div>
     </nav>
@@ -164,79 +192,78 @@
                         </svg>
                     </div>
                     
-                    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Thank You!</h1>
-                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Your request for early access to HalloDoc has been successfully submitted. We're excited to have you onboard!</p>
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4" data-i18n="thank-you-title">Thank You!</h1>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto" data-i18n="thank-you-message">Your request for early access to HalloDoc has been successfully submitted. We're excited to have you onboard!</p>
                 </div>
                 
                 <div class="grid md:grid-cols-2 gap-8 mb-8">
                     <div class="glass-card p-6 rounded-xl">
-                        <h2 class="text-xl font-semibold text-gray-800 mb-4">What Happens Next?</h2>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4" data-i18n="what-happens-next">What Happens Next?</h2>
                         <ul class="space-y-3">
                             <li class="flex items-start">
                                 <svg class="w-5 h-5 text-primary mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span class="ml-2 text-gray-700">Our team will review your request</span>
+                                <span class="ml-2 text-gray-700" data-i18n="next-step-1">Our team will review your request</span>
                             </li>
                             <li class="flex items-start">
                                 <svg class="w-5 h-5 text-primary mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span class="ml-2 text-gray-700">You'll receive a confirmation email within 24 hours</span>
+                                <span class="ml-2 text-gray-700" data-i18n="next-step-2">You'll receive a confirmation email within 24 hours</span>
                             </li>
                             <li class="flex items-start">
                                 <svg class="w-5 h-5 text-primary mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span class="ml-2 text-gray-700">We'll schedule a personalized onboarding call</span>
+                                <span class="ml-2 text-gray-700" data-i18n="next-step-3">We'll schedule a personalized onboarding call</span>
                             </li>
                             <li class="flex items-start">
                                 <svg class="w-5 h-5 text-primary mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span class="ml-2 text-gray-700">We'll discuss your specific needs and implementation timeline</span>
+                                <span class="ml-2 text-gray-700" data-i18n="next-step-4">We'll discuss your specific needs and implementation timeline</span>
                             </li>
                         </ul>
                     </div>
                     
                     <div class="glass-card p-6 rounded-xl bg-gradient-to-br from-primary-light/10 to-primary/10">
-                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Early Access Benefits</h2>
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4" data-i18n="early-access-benefits">Early Access Benefits</h2>
                         <ul class="space-y-3">
                             <li class="flex items-start">
                                 <svg class="w-5 h-5 text-primary mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span class="ml-2 text-gray-700">12 months completely free access</span>
+                                <span class="ml-2 text-gray-700" data-i18n="benefit-free">12 months completely free access</span>
                             </li>
                             <li class="flex items-start">
                                 <svg class="w-5 h-5 text-primary mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span class="ml-2 text-gray-700">Priority support and feature requests</span>
+                                <span class="ml-2 text-gray-700" data-i18n="benefit-priority">Priority support and feature requests</span>
                             </li>
                             <li class="flex items-start">
                                 <svg class="w-5 h-5 text-primary mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span class="ml-2 text-gray-700">Personalized setup and onboarding</span>
+                                <span class="ml-2 text-gray-700" data-i18n="benefit-personalized">Personalized setup and onboarding</span>
                             </li>
                             <li class="flex items-start">
                                 <svg class="w-5 h-5 text-primary mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                                 </svg>
-                                <span class="ml-2 text-gray-700">Guaranteed pricing discount after free period</span>
+                                <span class="ml-2 text-gray-700" data-i18n="benefit-discount">Guaranteed pricing discount after free period</span>
                             </li>
                         </ul>
                     </div>
                 </div>
                 
                 <div class="text-center">
-                    <a href="index.html" class="btn-3d inline-block px-8 py-4 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-dark transition duration-300">
+                    <a href="index.html" class="btn-3d inline-block px-8 py-4 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-dark transition duration-300" data-i18n="back-home">
                         Back to Homepage
                     </a>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -252,27 +279,27 @@
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Product</h3>
+                    <h3 class="text-lg font-semibold mb-4" data-i18n="product">Product</h3>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="index.html#features" class="hover:text-white transition">Features</a></li>
-                        <li><a href="index.html#how-it-works" class="hover:text-white transition">How It Works</a></li>
-                        <li><a href="index.html#benefits" class="hover:text-white transition">Benefits</a></li>
-                        <li><a href="index.html#faq" class="hover:text-white transition">FAQ</a></li>
+                        <li><a href="index.html#features" class="hover:text-white transition" data-i18n="features">Features</a></li>
+                        <li><a href="index.html#how-it-works" class="hover:text-white transition" data-i18n="how-it-works">How It Works</a></li>
+                        <li><a href="index.html#benefits" class="hover:text-white transition" data-i18n="benefits">Benefits</a></li>
+                        <li><a href="index.html#faq" class="hover:text-white transition" data-i18n="faq">FAQ</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                    <h3 class="text-lg font-semibold mb-4" data-i18n="legal">Legal</h3>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
-                        <li><a href="#" class="hover:text-white transition">Impressum</a></li>
-                        <li><a href="#" class="hover:text-white transition">GDPR Compliance</a></li>
+                        <li><a href="#" class="hover:text-white transition" data-i18n="privacy-policy">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition" data-i18n="terms">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition" data-i18n="impressum">Impressum</a></li>
+                        <li><a href="#" class="hover:text-white transition" data-i18n="gdpr">GDPR Compliance</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <h3 class="text-lg font-semibold mb-4" data-i18n="contact">Contact</h3>
                     <ul class="space-y-2 text-gray-400">
                         <li class="flex items-start">
                             <svg class="w-5 h-5 text-gray-400 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
@@ -310,12 +337,12 @@
             
             <div class="border-t border-gray-700 mt-8 pt-6">
                 <div class="flex flex-col md:flex-row md:justify-between md:items-center">
-                    <p class="text-gray-400 text-sm">© 2025 HalloDoc. All rights reserved.</p>
+                    <p class="text-gray-400 text-sm" data-i18n="copyright">© 2025 HalloDoc. All rights reserved.</p>
                     
                     <!-- Logo with "Made by" positioned above but left-aligned with the logo -->
                     <div class="mt-6 md:mt-0">
                         <div class="flex flex-col items-start">
-                            <span class="text-gray-400 text-sm mb-2">Made by</span>
+                            <span class="text-gray-400 text-sm mb-2" data-i18n="made-by">Made by</span>
                             <img src="images/spicynuggets-logo.png" alt="SpicyNuggets" class="h-24 w-auto" style="min-width: 130px;">
                         </div>
                     </div>
@@ -352,6 +379,13 @@
                 confetti.style.height = Math.random() * 10 + 5 + 'px';
                 confettiContainer.appendChild(confetti);
             }
+        });
+    </script>
+    <script src="language-switcher.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize language switcher
+            initLanguageSwitcher();
         });
     </script>
 </body>
