@@ -98,7 +98,22 @@ const translations = {
         "impressum": "Impressum",
         "gdpr": "GDPR Compliance",
         "copyright": "© 2025 HalloDoc. All rights reserved.",
-        "made-by": "Made by"
+        "made-by": "Made by",
+        
+        // Thank You Page
+        "thank-you-title": "Thank You!",
+        "thank-you-message": "Your request for early access to HalloDoc has been successfully submitted. We're excited to have you onboard!",
+        "what-happens-next": "What Happens Next?",
+        "next-step-1": "Our team will review your request",
+        "next-step-2": "You'll receive a confirmation email within 24 hours",
+        "next-step-3": "We'll schedule a personalized onboarding call",
+        "next-step-4": "We'll discuss your specific needs and implementation timeline",
+        "early-access-benefits": "Early Access Benefits",
+        "benefit-free": "12 months completely free access",
+        "benefit-priority": "Priority support and feature requests",
+        "benefit-personalized": "Personalized setup and onboarding",
+        "benefit-discount": "Guaranteed pricing discount after free period",
+        "back-home": "Back to Homepage"
     },
     de: {
         // Navigation
@@ -198,7 +213,22 @@ const translations = {
         "impressum": "Impressum",
         "gdpr": "DSGVO-Konformität",
         "copyright": "© 2025 HalloDoc. Alle Rechte vorbehalten.",
-        "made-by": "Erstellt von"
+        "made-by": "Erstellt von",
+        
+        // Thank You Page
+        "thank-you-title": "Vielen Dank!",
+        "thank-you-message": "Ihre Anfrage für einen frühzeitigen Zugang zu HalloDoc wurde erfolgreich übermittelt. Wir freuen uns, Sie an Bord zu haben!",
+        "what-happens-next": "Was passiert als Nächstes?",
+        "next-step-1": "Unser Team wird Ihre Anfrage prüfen",
+        "next-step-2": "Sie erhalten innerhalb von 24 Stunden eine Bestätigungs-E-Mail",
+        "next-step-3": "Wir werden einen persönlichen Einführungstermin vereinbaren",
+        "next-step-4": "Wir besprechen Ihre spezifischen Anforderungen und den Implementierungszeitplan",
+        "early-access-benefits": "Vorteile des frühen Zugangs",
+        "benefit-free": "12 Monate komplett kostenloser Zugang",
+        "benefit-priority": "Vorrangiger Support und Feature-Anfragen",
+        "benefit-personalized": "Personalisierte Einrichtung und Einführung",
+        "benefit-discount": "Garantierter Preisnachlass nach der kostenlosen Periode",
+        "back-home": "Zurück zur Startseite"
     }
 };
 
